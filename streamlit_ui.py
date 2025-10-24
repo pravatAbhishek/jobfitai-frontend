@@ -257,15 +257,17 @@ elif selected == "Demo":
             match_score = result.get('match_score', 0)
 
             try:
-                # Convert to float and ensure range between 0–1
-                progress_value = float(match_score) / 100
-                progress_value = min(max(progress_value, 0), 1)
+                # Convert to float and clamp to valid range (0–100)
+                match_score = float(match_score)
+                match_score = max(0, min(match_score, 100))
+                progress_value = match_score / 100
             except (ValueError, TypeError):
-                progress_value = 0
                 match_score = 0
+                progress_value = 0
 
             st.progress(progress_value)
-            st.write(f"**{match_score}%** match with the job description.")
+            st.write(f"**{match_score:.1f}%** match with the job description.")
+
 
 
             st.subheader("Matched Skills ✅")
