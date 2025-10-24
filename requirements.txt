@@ -1,0 +1,5 @@
+streamlit
+reportlab
+streamlit-option-menu
+pillow
+requests
