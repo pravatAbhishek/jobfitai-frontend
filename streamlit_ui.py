@@ -169,7 +169,7 @@ else:
 # Backend function
 # ----------------------------
 def analyze_resume(resume_file, job_desc):
-    backend_url = "https://jobfitai-backend-674b.onrender.com/"  # Flask endpoint
+    backend_url = "https://jobfitai-backend-674b.onrender.com/match"  # Flask endpoint
 
     try:
         # Ensure the uploaded file is sent as a file object
