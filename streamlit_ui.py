@@ -252,8 +252,21 @@ elif selected == "Demo":
         else:
             result = analyze_resume(resume_file, job_desc)
             st.subheader("Match Score")
-            st.progress(result['match_score']/100)
-            st.write(f"**{result['match_score']}%** match with the job description.")
+
+# Safely handle invalid or missing match scores
+            match_score = result.get('match_score', 0)
+
+            try:
+                # Convert to float and ensure range between 0–1
+                progress_value = float(match_score) / 100
+                progress_value = min(max(progress_value, 0), 1)
+            except (ValueError, TypeError):
+                progress_value = 0
+                match_score = 0
+
+            st.progress(progress_value)
+            st.write(f"**{match_score}%** match with the job description.")
+
 
             st.subheader("Matched Skills ✅")
             for skill in result['matched_skills']:
